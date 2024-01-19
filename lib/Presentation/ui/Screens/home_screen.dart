@@ -19,21 +19,18 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           CircleIconButton(
             onTap: (){
-
             },
             iconData: Icons.person,
           ),
           const SizedBox(width: 10,),
           CircleIconButton(
             onTap: (){
-
             },
             iconData: Icons.call,
           ),
           const SizedBox(width: 10,),
           CircleIconButton(
             onTap: (){
-
             },
             iconData: Icons.notifications_active,
           ),
