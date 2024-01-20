@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Utility/assets_path.dart';
 import '../Widgets/home/circleiconbutton.dart';
-import '../Widgets/image_carousel.dart';
+import '../Widgets/home/banner_carousel.dart';
+import '../Widgets/home/section_title.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const ImageCarousel()
+              const BannerCarousel(),
+              const SizedBox(
+                height: 16,
+              ),
+               SectionTitle(
+                title: 'All Categories',
+                onTapSeeAll: (){},
+              )
             ],
           ),
         ),
@@ -87,4 +95,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
 
