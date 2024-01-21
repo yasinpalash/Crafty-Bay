@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../Utility/assets_path.dart';
+import '../Widgets/categories_item.dart';
 import '../Widgets/home/circleiconbutton.dart';
 import '../Widgets/home/banner_carousel.dart';
 import '../Widgets/home/section_title.dart';
+import '../Widgets/product_card_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,14 +34,70 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-               SectionTitle(
+              SectionTitle(
                 title: 'All Categories',
-                onTapSeeAll: (){},
-              )
+                onTapSeeAll: () {},
+              ),
+              categoryList,
+              SectionTitle(
+                title: 'Popular',
+                onTapSeeAll: () {},
+              ),
+              productList,
+              const SizedBox(height: 8,),
+              SectionTitle(
+                title: 'Special',
+                onTapSeeAll: () {},
+              ),
+              productList,
+              const SizedBox(height: 8,),
+              SectionTitle(
+                title: 'New',
+                onTapSeeAll: () {},
+              ),
+              productList,
             ],
           ),
         ),
       ),
+    );
+  }
+
+  SizedBox get categoryList {
+    return SizedBox(
+      height: 130,
+      child: ListView.separated(
+          primary: false,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return const CategoriesItem();
+          },
+          separatorBuilder: (_, __) {
+            return const SizedBox(
+              width: 8,
+            );
+          },
+          itemCount: 10),
+    );
+  }
+
+  SizedBox get productList {
+    return SizedBox(
+      height: 190,
+      child: ListView.separated(
+          primary: false,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return const ProductCardItem();
+          },
+          separatorBuilder: (_, __) {
+            return const SizedBox(
+              width: 8,
+            );
+          },
+          itemCount: 10),
     );
   }
 
@@ -95,5 +153,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
