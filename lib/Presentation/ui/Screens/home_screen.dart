@@ -1,4 +1,6 @@
+import 'package:crafty_bay/Presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../Utility/assets_path.dart';
 import '../Widgets/categories_item.dart';
 import '../Widgets/home/circleiconbutton.dart';
@@ -36,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionTitle(
                 title: 'All Categories',
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.find<MainBottomNavController>().changeIndex(1);
+                },
               ),
               categoryList,
               SectionTitle(

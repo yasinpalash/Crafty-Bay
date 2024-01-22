@@ -1,4 +1,3 @@
-import 'package:crafty_bay/Presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/Presentation/ui/Screens/auth/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
