@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductListScreen extends StatefulWidget {
-  const ProductListScreen({super.key});
+  const ProductListScreen({super.key, this.categories});
+  final String? categories;
 
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
@@ -20,7 +21,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             Get.back();
           },
         ),
-        title: const Text('Product'),
+        title: Text(widget.categories ?? 'Product'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
