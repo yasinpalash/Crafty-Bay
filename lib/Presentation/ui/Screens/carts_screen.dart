@@ -1,10 +1,8 @@
 import 'package:crafty_bay/Presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/Presentation/ui/Utility/app_colors.dart';
-import 'package:crafty_bay/Presentation/ui/Utility/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_count_number_button/item_count_number_button.dart';
-
+import '../Widgets/Carts/cart_product_item.dart';
 class CartsScreen extends StatefulWidget {
   const CartsScreen({super.key});
 
@@ -33,65 +31,14 @@ class _CartsScreenState extends State<CartsScreen> {
         body: Column(
           children: [
             Expanded(
-              child: Column(
-                children: [
-                  Card(
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          AssetsPath.dummyShoeJpg,
-                          width: 100,
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('New Nike shoe mk231'),
-                                        Text('New Nike shoe mk231'),
-                                      ],
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.delete_outline))
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    '\$100',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.primaryColor),
-                                  ),
-                                  ItemCount(
-                                    initialValue: 1,
-                                    minValue: 1,
-                                    maxValue: 10,
-                                    decimalPlaces: 0,
-                                    step: 1,
-                                    color: AppColors.primaryColor,
-                                    onChanged: (value) {
-                                      // Handle counter value changes
-                                      print('Selected value: $value');
-                                    },
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+              child: ListView.separated(
+                itemCount: 8,
+                itemBuilder: (context, index) {
+                  return const CardProductItem();
+                },
+                separatorBuilder: (_, __) => const SizedBox(
+                  height: 8,
+                ),
               ),
             ),
             totalPriceAndCheckOutSection
@@ -145,3 +92,4 @@ class _CartsScreenState extends State<CartsScreen> {
     );
   }
 }
+
