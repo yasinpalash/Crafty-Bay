@@ -18,7 +18,6 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-
       children: [
         CarouselSlider(
           options: CarouselOptions(
