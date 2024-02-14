@@ -13,6 +13,13 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   ValueNotifier<int> noOfItem = ValueNotifier(1);
+  List<Color> colors = [
+    Colors.black,
+    Colors.amber,
+    Colors.lightGreen,
+    Colors.green,
+    Colors.white54
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +33,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -53,7 +61,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Row(
                         children: [
                           const Wrap(
@@ -104,7 +114,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                           )
                         ],
-                      )
+                      ),
+                      const Text(
+                        'Color',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
                     ],
                   ),
                 )
