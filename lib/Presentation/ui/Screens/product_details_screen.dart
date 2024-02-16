@@ -38,10 +38,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              children: [
-                const ProductImageCarousel(),
-                Padding(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const ProductImageCarousel(),
+                  productDetailsBody,
+                ],
+              ),
+            ),
+          ),
+          priceAndAddToCartSection,
+        ],
+      ),
+    );
+  }
+
+  Padding get productDetailsBody {
+    return Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,61 +88,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      Row(
-                        children: [
-                          const Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.star,
-                                size: 18,
-                                color: Colors.amber,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                '4.4',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black45),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Text(
-                            'Reviews',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.primaryColor),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Card(
-                            color: AppColors.primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Icon(
-                                Icons.favorite_outline_rounded,
-                                size: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
-                        ],
+                      reviewAndRating,
+                      const SizedBox(
+                        height: 8,
                       ),
                       const Text(
                         'Color',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 8,
                       ),
                       ColorSelector(
                         colors: colors,
@@ -151,19 +120,79 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       SizeSelector(
                         sizes: sizes,
                         onChange: (s) {},
-                      )
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const Text(
+                        'Description',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const Text(
+                        'Lorises and pottos are small (85 g - 1.5 kg), arboreal primates of Africa and Asia. Six species placed in 4 genera make up the family (previously known as Loridae). They are small animals, stealthily stalking insects or seeking fruit at night and spending the day in hollow trees or clinging to branches.',
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
                     ],
                   ),
-                )
-              ],
-            ),
-          ),
-          priceAndAddToCartSection,
-        ],
-      ),
-    );
+                );
   }
-
+  Row get reviewAndRating {
+    return Row(
+                      children: [
+                        const Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.star,
+                              size: 18,
+                              color: Colors.amber,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              '4.4',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black45),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text(
+                          'Reviews',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primaryColor),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Card(
+                          color: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Icon(
+                              Icons.favorite_outline_rounded,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+  }
   Container get priceAndAddToCartSection {
     return Container(
       padding: const EdgeInsets.all(16),
