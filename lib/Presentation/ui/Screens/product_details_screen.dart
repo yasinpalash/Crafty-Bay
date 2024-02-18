@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
-
 import '../Utility/app_colors.dart';
 import '../Widgets/product_details/color_selector.dart';
 import '../Widgets/product_details/product_image_carousel.dart';
