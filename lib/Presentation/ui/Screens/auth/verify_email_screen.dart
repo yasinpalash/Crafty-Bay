@@ -1,3 +1,4 @@
+import 'package:crafty_bay/Presentation/state_holder/send_email_otp_controller.dart';
 import 'package:crafty_bay/Presentation/ui/Screens/auth/verify_otp_screen.dart';
 import 'package:crafty_bay/Presentation/ui/Widgets/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -56,16 +57,42 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_fromKey.currentState!.validate()) {
-                        Get.to(const VerifyOtpScreen());
-                      }
-                    },
-                    child: const Text('Next'),
-                  ),
+                GetBuilder<SendEmailOtpController>(
+                  builder: (controller) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: Visibility(
+                        visible: controller.inProgress == false,
+                        replacement: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            // if (_fromKey.currentState!.validate()) {
+                            //   final bool result =
+                            //       await controller.sendOtpToEmail(
+                            //           _emailTEController.text.trim());
+                            //   if (result) {
+                            Get.to(
+                              () => VerifyOtpScreen(
+                                email: _emailTEController.text.trim(),
+                              ),
+                            );
+                            //   } else {
+                            //     Get.showSnackbar(
+                            //       GetSnackBar(
+                            //         title: 'send otp failed',
+                            //         message: controller.errorMessage,
+                            //       ),
+                            //     );
+                            //   }
+                            // }
+                          },
+                          child: const Text('Next'),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
