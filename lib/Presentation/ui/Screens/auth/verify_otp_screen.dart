@@ -103,6 +103,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   height: 20,
                 ),
                 SizedBox(
+
                   width: double.infinity,
                   child: GetBuilder<VerifyOtpController>(
                     builder: (verifyOTPController) {
