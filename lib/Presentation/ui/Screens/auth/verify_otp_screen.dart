@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:crafty_bay/Presentation/ui/Screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/Presentation/ui/Utility/app_colors.dart';
 import 'package:crafty_bay/Presentation/ui/Widgets/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   height: 20,
                 ),
                 SizedBox(
-
                   width: double.infinity,
                   child: GetBuilder<VerifyOtpController>(
                     builder: (verifyOTPController) {
@@ -120,11 +120,17 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                                 widget.email,
                                 _otpTEController.text.trim(),
                               );
-
                               if (response) {
-                                Get.to(const CompleteProfileScreen());
+                                if (verifyOTPController
+                                    .shouldNavigateCompleteProfile) {
+                                  Get.to(const CompleteProfileScreen());
+                                } else {
+                                  Get.offAll(() => const MainBottomNavScreen());
+                                }
                               } else {
                                 Get.showSnackbar(GetSnackBar(
+                                  isDismissible: true,
+                                  duration: const Duration(seconds: 2),
                                   title: 'OTP Verification failed',
                                   message: verifyOTPController.errorMessage,
                                 ));
@@ -172,7 +178,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
 
   @override
   void dispose() {
-    _timer.cancel();
     _timer.cancel();
     super.dispose();
   }

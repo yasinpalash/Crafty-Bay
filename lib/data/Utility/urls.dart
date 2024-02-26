@@ -3,4 +3,5 @@ class Urls {
   static String sendEmailOtp(String email) => '$_baseUrl/UserLogin/$email';
   static String verityOTP(String email, String otp) =>
       '$_baseUrl/VerifyLogin/$email/$otp';
+  static String readProfile= '$_baseUrl/ReadProfile';
 }
