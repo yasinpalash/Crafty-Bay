@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:crafty_bay/Presentation/ui/Screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/Presentation/ui/Utility/app_colors.dart';
 import 'package:crafty_bay/Presentation/ui/Widgets/app_logo.dart';
@@ -8,16 +9,16 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../state_holder/verify_otp_controller.dart';
 import 'CompleteProfileScreen.dart';
 
-class VerifyOtpScreen extends StatefulWidget {
-  const VerifyOtpScreen({Key? key, required this.email}) : super(key: key);
+class VerifyOTPScreen extends StatefulWidget {
+  const VerifyOTPScreen({Key? key, required this.email}) : super(key: key);
 
   final String email;
 
   @override
-  _VerifyOtpScreenState createState() => _VerifyOtpScreenState();
+  _VerifyOTPScreenState createState() => _VerifyOTPScreenState();
 }
 
-class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
+class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   late Timer _timer;
   int _expirationTime = 120;
   final TextEditingController _otpTEController = TextEditingController();
@@ -77,7 +78,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   height: 24,
                 ),
                 PinCodeTextField(
-                  length: 4,
+                  controller: _otpTEController,
+                  length: 6,
                   obscureText: false,
                   animationType: AnimationType.fade,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -118,9 +120,10 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                               final bool response =
                                   await verifyOTPController.verifyOTP(
                                 widget.email,
-                                _otpTEController.text.trim(),
+                                _otpTEController.text.trim()
                               );
-                              if (response) {
+                              log(response.toString());
+                              if (response==false) {
                                 if (verifyOTPController
                                     .shouldNavigateCompleteProfile) {
                                   Get.to(const CompleteProfileScreen());
@@ -128,12 +131,14 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                                   Get.offAll(() => const MainBottomNavScreen());
                                 }
                               } else {
-                                Get.showSnackbar(GetSnackBar(
-                                  isDismissible: true,
-                                  duration: const Duration(seconds: 2),
-                                  title: 'OTP Verification failed',
-                                  message: verifyOTPController.errorMessage,
-                                ));
+                                Get.showSnackbar(
+                                  GetSnackBar(
+                                    isDismissible: true,
+                                    duration: const Duration(seconds: 2),
+                                    title: 'OTP Verification failed',
+                                    message: verifyOTPController.errorMessage,
+                                  ),
+                                );
                               }
                             }
                           },
@@ -178,6 +183,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
 
   @override
   void dispose() {
+    _timer.cancel();
     _timer.cancel();
     super.dispose();
   }

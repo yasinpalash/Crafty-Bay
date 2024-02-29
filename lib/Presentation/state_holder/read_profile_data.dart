@@ -18,7 +18,7 @@ class ReadProfileDataController extends GetxController {
     _inProgress = true;
     update();
     final response =
-        await NetworkCaller().getRequest(Urls.readProfile, token: token);
+        await NetworkCaller().getRequest(Urls.readProfile,token: token);
     _inProgress = false;
 
     if (response.isSuccess) {

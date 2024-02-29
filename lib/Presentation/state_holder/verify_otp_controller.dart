@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/Presentation/state_holder/read_profile_data.dart';
 import 'package:crafty_bay/data/Utility/urls.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
@@ -6,11 +8,9 @@ import 'package:get/get.dart';
 class VerifyOtpController extends GetxController {
   bool _inProgress = false;
   bool get inProgress => _inProgress;
-
   String _errorMessage = '';
-
   String get errorMessage => _errorMessage;
-  bool _shouldNavigateCompleteProfile = true;
+  bool _shouldNavigateCompleteProfile = false;
   bool get shouldNavigateCompleteProfile => _shouldNavigateCompleteProfile;
 
   Future<bool> verifyOTP(String email, String otp) async {
@@ -21,9 +21,11 @@ class VerifyOtpController extends GetxController {
     _inProgress = false;
     if (response.isSuccess) {
       final token = response.responseData['data'];
+      log(token);
+      await Future.delayed(const Duration(seconds: 3));
       final result =
           await Get.find<ReadProfileDataController>().readProfileData(token);
-      if(result){
+      if(result==false){
         _shouldNavigateCompleteProfile=Get.find<ReadProfileDataController>().isProfileComplete==false;
       }else{
         _errorMessage=Get.find<ReadProfileDataController>().errorMessage;

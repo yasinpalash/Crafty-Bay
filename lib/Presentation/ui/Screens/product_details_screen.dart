@@ -1,4 +1,6 @@
+import 'package:crafty_bay/Presentation/ui/Screens/reviews_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 import '../Utility/app_colors.dart';
 import '../Widgets/product_details/color_selector.dart';
@@ -33,7 +35,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Product Details'),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -165,12 +169,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         const SizedBox(
                           width: 8,
                         ),
-                        const Text(
-                          'Reviews',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primaryColor),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(35),
+                          onTap: (){
+                            Get.to(()=>const ReviewsScreen());
+                            
+                          },
+                          child: const Text(
+                            'Reviews',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primaryColor),
+                          ),
                         ),
                         const SizedBox(
                           width: 8,
