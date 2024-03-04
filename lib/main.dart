@@ -7,5 +7,6 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
   );
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const CraftyBay());
 }

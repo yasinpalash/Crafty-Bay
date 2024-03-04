@@ -1,4 +1,6 @@
+import 'package:crafty_bay/Presentation/state_holder/auth_controller.dart';
 import 'package:crafty_bay/Presentation/state_holder/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/Presentation/ui/Screens/auth/verify_email_screen.dart';
 import 'package:crafty_bay/Presentation/ui/Screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -139,7 +141,10 @@ class _HomeScreenState extends State<HomeScreen> {
       title: Image.asset(AssetsPath.appBarLogo),
       actions: [
         CircleIconButton(
-          onTap: () {},
+          onTap: () async{
+            await Get.find<AuthController>().authClearData();
+            Get.to(const VerifyEmailScreen());
+          },
           iconData: Icons.person,
         ),
         const SizedBox(
