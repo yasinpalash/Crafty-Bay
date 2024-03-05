@@ -1,3 +1,4 @@
+import 'package:crafty_bay/Presentation/state_holder/auth_controller.dart';
 import 'package:crafty_bay/data/Utility/urls.dart';
 import 'package:crafty_bay/data/models/profile.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
@@ -33,6 +34,8 @@ class CompleteProfileController extends GetxController {
     _inProgress = false;
     if (response.isSuccess) {
       _profile = Profile.fromJson(response.responseData['data']);
+      Get.find<AuthController>().saveUserDetails(token, _profile);
+
       update();
       return true;
     } else {
