@@ -1,6 +1,7 @@
 import 'package:crafty_bay/Presentation/state_holder/complete_profile_controller.dart';
 import 'package:crafty_bay/Presentation/state_holder/verify_otp_controller.dart';
 import 'package:crafty_bay/Presentation/ui/Widgets/app_logo.dart';
+import 'package:crafty_bay/data/models/creat_profile_params.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -147,13 +148,19 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                             final bool result =
                                 await Get.find<CompleteProfileController>()
                                     .createProfileDate(
-                              Get.find<VerifyOtpController>().token,
-                              _firstNameTEController.text.trim(),
-                              _lastNameTEController.text.trim(),
-                              _mobileTEController.text.trim(),
-                              _cityTEController.text.trim(),
-                              _shippingAddressTEController.text.trim(),
-                            );
+                                        Get.find<VerifyOtpController>().token,
+                                        CreateProfileParams(
+                                          firstName: _firstNameTEController.text
+                                              .trim(),
+                                          lastName:
+                                              _lastNameTEController.text.trim(),
+                                          mobile:
+                                              _mobileTEController.text.trim(),
+                                          city: _cityTEController.text.trim(),
+                                          shippingAddress:
+                                              _shippingAddressTEController.text
+                                                  .trim(),
+                                        ));
 
                             if (result) {
                               Get.offAll(const MainBottomNavScreen());
