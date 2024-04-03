@@ -1,4 +1,5 @@
 import 'package:crafty_bay/Presentation/state_holder/auth_controller.dart';
+import 'package:crafty_bay/Presentation/state_holder/home_banner_controller.dart';
 import 'package:crafty_bay/Presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/Presentation/ui/Screens/auth/verify_email_screen.dart';
 import 'package:crafty_bay/Presentation/ui/Screens/product_list_screen.dart';
@@ -35,7 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const BannerCarousel(),
+              SizedBox(
+                  height: 210,
+                  child: GetBuilder<HomeBannerController>(
+                      builder: (homeBannerController) {
+                    return BannerCarousel(bannerList:
+                      homeBannerController.bannerListModel.bannerList??
+                    [],
+
+                    );
+                  })),
               const SizedBox(
                 height: 16,
               ),
@@ -49,17 +59,21 @@ class _HomeScreenState extends State<HomeScreen> {
               SectionTitle(
                 title: 'Popular',
                 onTapSeeAll: () {
-                  Get.to(()=>const ProductListScreen());
+                  Get.to(() => const ProductListScreen());
                 },
               ),
               productList,
-              const SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               SectionTitle(
                 title: 'Special',
                 onTapSeeAll: () {},
               ),
               productList,
-              const SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               SectionTitle(
                 title: 'New',
                 onTapSeeAll: () {},
@@ -141,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: Image.asset(AssetsPath.appBarLogo),
       actions: [
         CircleIconButton(
-          onTap: () async{
+          onTap: () async {
             await Get.find<AuthController>().authClearData();
             Get.to(const VerifyEmailScreen());
           },
@@ -165,4 +179,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

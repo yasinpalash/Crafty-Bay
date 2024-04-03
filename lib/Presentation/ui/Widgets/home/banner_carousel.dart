@@ -2,12 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crafty_bay/Presentation/ui/Utility/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/Banner.dart';
+
 class BannerCarousel extends StatefulWidget {
   const BannerCarousel({
     super.key,
-    this.height,
+    this.height, required this.bannerList,
   });
   final double? height;
+  final List<BannerItem> bannerList;
 
   @override
   State<BannerCarousel> createState() => _BannerCarouselState();
@@ -28,20 +31,34 @@ class _BannerCarouselState extends State<BannerCarousel> {
               viewportFraction: 1,
               autoPlay: false,
           ),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.bannerList.map((banner) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 1),
-                    decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(8)),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ));
+                return Stack(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 1),
+                        decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                        image: DecorationImage(image: NetworkImage(banner.image??'')), borderRadius: BorderRadius.circular(8),
+
+                        ),
+                        alignment: Alignment.center,
+                    ),
+                    Column(
+                      children: [
+                        SizedBox(
+                            width:100,
+                            child: Text(banner.shortDes??"")),
+                        SizedBox(
+                            width:100,
+                            child: Text(banner.title??"")),
+                      ],
+                    )
+
+                  ],
+                );
               },
             );
           }).toList(),
@@ -55,7 +72,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < widget.bannerList.length; i++)
                   Container(
                     height: 14,
                     width: 14,
