@@ -1,4 +1,5 @@
 import 'package:crafty_bay/Presentation/state_holder/auth_controller.dart';
+import 'package:crafty_bay/Presentation/state_holder/category_controller.dart';
 import 'package:crafty_bay/Presentation/state_holder/home_banner_controller.dart';
 import 'package:crafty_bay/Presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/Presentation/ui/Screens/auth/verify_email_screen.dart';
@@ -89,19 +90,30 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get categoryList {
     return SizedBox(
       height: 130,
-      child: ListView.separated(
-          primary: false,
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return const CategoriesItem();
-          },
-          separatorBuilder: (_, __) {
-            return const SizedBox(
-              width: 8,
-            );
-          },
-          itemCount: 10),
+      child: GetBuilder<CategoryController>(
+        builder: (category) {
+          return Visibility(
+            // visible: category.inProgress==false,
+            // replacement: const Center(child: CircularProgressIndicator(),),
+            child: ListView.separated(
+              itemCount: category.categoryListModel.categoryList?.length??0,
+                primary: false,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return  CategoriesItem(categoryItem: category.categoryListModel.categoryList![index],
+
+                  );
+                },
+                separatorBuilder: (_, __) {
+                  return const SizedBox(
+                    width: 8,
+                  );
+                },
+               ),
+          );
+        }
+      ),
     );
   }
 
