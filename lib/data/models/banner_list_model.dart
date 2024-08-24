@@ -1,4 +1,4 @@
-import 'Banner.dart';
+import 'package:crafty_bay/data/models/banner_item.dart';
 
 class BannerListModel {
   String? msg;
@@ -25,4 +25,3 @@ class BannerListModel {
     return data;
   }
 }
-
