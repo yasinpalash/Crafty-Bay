@@ -9,4 +9,11 @@ A modern e-commerce mobile application with user authentication, product catalog
 - User Profiles: Manage personal details and preferences.
 - Modern UI/UX: Clean, responsive, and intuitive user interface.
 
+## 🛠️ Technologies Used
+- Framework: Flutter
+- State Management: GetX
+- API Communication: RESTful APIs, HTTP
+- Local Storage: Shared Preferences
+- Web Content: WebView
 
+![all-min](https://github.com/user-attachments/assets/ef82da61-c8ee-4209-9ce1-8191e0aa0731)
